@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Fylder 40 – Tilmelding</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #D4AF37;
+    --gold-light: #F5D87A;
+    --gold-dark: #A07D10;
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #1a1a1a;
+    --text: #f0e6c8;
+    --muted: #888;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Sparkle background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(212,175,55,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(212,175,55,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(212,175,55,0.03) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+    opacity: 0;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 0.8; transform: scale(1.5); }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .header-tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(212,175,55,0.3);
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 14vw, 80px);
+    font-weight: 900;
+    line-height: 0.9;
+    color: white;
+    text-shadow: 0 0 40px rgba(212,175,55,0.3);
+  }
+
+  .header h1 span {
+    display: block;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: clamp(80px, 22vw, 130px);
+  }
+
+  .header-sub {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .header-sub strong {
+    color: var(--gold);
+  }
+
+  /* Info pills */
+  .info-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .info-pill {
+    background: rgba(212,175,55,0.1);
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 30px;
+    padding: 8px 16px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+  }
+
+  .info-pill .icon { font-size: 16px; }
+
+  /* Form card */
+  .form-card {
+    background: var(--card);
+    border: 1px solid rgba(212,175,55,0.15);
+    border-radius: 20px;
+    padding: 36px 32px;
+    animation: fadeUp 0.8s 0.3s ease both;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(212,175,55,0.1);
+  }
+
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: white;
+  }
+
+  .form-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .field {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 14px 16px;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
+  }
+
+  select option { background: var(--dark); }
+
+  textarea {
+    resize: vertical;
+    min-height: 90px;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* Attend toggle */
+  .attend-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .attend-btn {
+    position: relative;
+  }
+
+  .attend-btn input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+  }
+
+  .attend-btn label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: none;
+    color: var(--muted);
+    background: rgba(255,255,255,0.03);
+    transition: all 0.2s;
+  }
+
+  .attend-btn input:checked + label {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(212,175,55,0.1);
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.08);
+  }
+
+  .attend-btn label:hover {
+    border-color: rgba(212,175,55,0.4);
+    color: var(--text);
+  }
+
+  /* Submit */
+  .submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+  }
+
+  .submit-btn:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(212,175,55,0.4);
+  }
+
+  .submit-btn:active { transform: translateY(0); }
+
+  .deadline-note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 14px;
+  }
+
+  .deadline-note span { color: var(--gold); }
+
+  /* Success state */
+  .success {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .success.show { display: block; }
+  .form-fields.hide { display: none; }
+
+  .success-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+    display: block;
+    animation: pop 0.5s 0.1s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+
+  @keyframes pop {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .success h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: white;
+    margin-bottom: 10px;
+  }
+
+  .success p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .success p strong { color: var(--gold); }
+
+  /* Guest list */
+  .guest-section {
+    margin-top: 40px;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+
+  .guest-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .guest-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: white;
+  }
+
+  .guest-count {
+    background: rgba(212,175,55,0.15);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--gold);
+  }
+
+  .guest-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .guest-item {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .guest-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--black);
+    flex-shrink: 0;
+  }
+
+  .guest-info { flex: 1; min-width: 0; }
+
+  .guest-name {
+    font-weight: 500;
+    font-size: 14px;
+    color: white;
+  }
+
+  .guest-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .guest-status {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .guest-msg {
+    font-size: 12px;
+    color: rgba(212,175,55,0.7);
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 32px;
+    color: var(--muted);
+    font-size: 14px;
+    border: 1px dashed rgba(255,255,255,0.08);
+    border-radius: 12px;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.2), transparent);
+    margin: 36px 0;
+  }
+
+  @media (max-width: 480px) {
+    .form-card { padding: 24px 20px; }
+    .field-row { grid-template-columns: 1fr; }
+    .container { padding: 30px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-tag">🎉 Du er inviteret</div>
+    <h1>MAX<span>40</span>ÅR</h1>
+    <div class="header-sub">Lørdag den <strong>4. juli 2026 kl. 13.00</strong></div>
+  </div>
+
+  <!-- Info pills -->
+  <div class="info-row">
+    <div class="info-pill"><span class="icon">🍽️</span> Mad & hygge</div>
+    <div class="info-pill"><span class="icon">👨‍👩‍👧</span> Børn velkomne</div>
+    <div class="info-pill"><span class="icon">🌃</span> Festen fortsætter i byen</div>
+  </div>
+
+  <!-- Form card -->
+  <div class="form-card">
+    <div class="form-title">Tilmeld dig festen</div>
+    <div class="form-desc">Svar venligst senest den <strong style="color:var(--gold)">27. juni 2026</strong></div>
+
+    <div class="form-fields" id="formFields">
+      <div class="field">
+        <label>Dit navn</label>
+        <input type="text" id="name" placeholder="Fornavn og efternavn" autocomplete="name">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Antal voksne</label>
+          <select id="adults">
+            <option value="1">1 voksen</option>
+            <option value="2">2 voksne</option>
+            <option value="3">3 voksne</option>
+            <option value="4">4 voksne</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Antal børn</label>
+          <select id="children">
+            <option value="0">Ingen børn</option>
+            <option value="1">1 barn</option>
+            <option value="2">2 børn</option>
+            <option value="3">3 børn</option>
+            <option value="4">4 børn</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Kommer du?</label>
+        <div class="attend-toggle">
+          <div class="attend-btn">
+            <input type="radio" name="attend" id="yes" value="yes" checked>
+            <label for="yes">✅ Ja, jeg kommer!</label>
+          </div>
+          <div class="attend-btn">
+            <input type="radio" name="attend" id="no" value="no">
+            <label for="no">❌ Kan desværre ikke</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Mobilnummer</label>
+        <input type="tel" id="mobile" placeholder="F.eks. 12 34 56 78" autocomplete="tel">
+        <div style="margin-top:10px; display:flex; align-items:center; gap:10px;">
+          <input type="checkbox" id="showMobile" style="width:18px;height:18px;cursor:pointer;accent-color:var(--gold);padding:0;">
+          <label for="showMobile" style="font-size:12px;letter-spacing:0;text-transform:none;color:var(--muted);cursor:pointer;margin:0;font-weight:400;">Andre gæster må se mit nummer</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Allergi / særlige hensyn</label>
+        <input type="text" id="allergy" placeholder="F.eks. vegetar, laktosefri... (valgfrit)">
+      </div>
+
+      <div class="field">
+        <label>Hilsen til Max <span style="color:var(--muted);font-size:11px">(valgfrit)</span></label>
+        <textarea id="message" placeholder="Skriv en lille hilsen eller sjov kommentar 🎂"></textarea>
+      </div>
+
+      <button class="submit-btn" onclick="submitRSVP()">Send svar 🥂</button>
+      <div class="deadline-note">Svar senest <span>27. juni 2026</span> — tak!</div>
+    </div>
+
+    <div class="success" id="successMsg">
+      <span class="success-icon">🥂</span>
+      <h2 id="successTitle">Tak, <span id="successName"></span>!</h2>
+      <p id="successText">Vi glæder os til at se dig den <strong>4. juli!</strong><br>Max er allerede begejstret 🎉</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Guest list -->
+  <div class="guest-section">
+    <div class="guest-header">
+      <div class="guest-title">Tilmeldte gæster</div>
+      <div class="guest-count" id="guestCount">0 svar</div>
+    </div>
+    <div class="guest-list" id="guestList">
+      <div class="empty-state">Ingen svar endnu — vær den første! 🎈</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Admin -->
+  <div style="text-align:center;">
+    <button onclick="toggleAdmin()" style="background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;letter-spacing:1px;text-decoration:underline;font-family:inherit;">🔐 Admin</button>
+  </div>
+
+  <div id="adminPanel" style="display:none; margin-top:20px; background:var(--card); border:1px solid rgba(212,175,55,0.2); border-radius:16px; padding:24px; animation: fadeUp 0.3s ease both;">
+    <div id="adminLogin">
+      <div style="font-family:'Playfair Display',serif;font-size:18px;color:white;margin-bottom:16px;">Admin — Max's oversigt</div>
+      <input type="password" id="adminPin" placeholder="Indtast PIN" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 16px;color:white;font-family:'DM Sans',sans-serif;font-size:15px;margin-bottom:12px;">
+      <button onclick="checkPin()" style="width:100%;background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));border:none;border-radius:10px;padding:12px;color:var(--black);font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;">Log ind</button>
+      <div id="pinError" style="color:#e74c3c;font-size:12px;margin-top:8px;text-align:center;display:none;">Forkert PIN</div>
+    </div>
+    <div id="adminContent" style="display:none;">
+      <div style="font-family:'Playfair Display',serif;font-size:18px;color:white;margin-bottom:4px;">Alle tilmeldinger</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:20px;">Numre er kun synlige her</div>
+      <div id="adminList"></div>
+    </div>
+  </div>
+  <div style="text-align:center; animation: fadeUp 0.8s 0.5s ease both;">
+    <div style="font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:12px;">Spørgsmål?</div>
+    <a href="tel:+4520118593" style="display:inline-flex; align-items:center; gap:10px; background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.3); border-radius:40px; padding:12px 24px; text-decoration:none; color:white; font-size:16px; font-weight:500; transition:all 0.2s;" onmouseover="this.style.background='rgba(212,175,55,0.2)'" onmouseout="this.style.background='rgba(212,175,55,0.1)'">
+      <span style="font-size:20px;">📞</span>
+      <span>Ring til Max: <strong style="color:var(--gold);">20 11 85 93</strong></span>
+    </a>
+  </div>
+
+</div>
+
+<script>
+  // Generate stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `
+      left: ${Math.random()*100}%;
+      top: ${Math.random()*100}%;
+      --dur: ${2 + Math.random()*4}s;
+      --delay: ${Math.random()*5}s;
+      width: ${1 + Math.random()*2}px;
+      height: ${1 + Math.random()*2}px;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  // Storage key
+  const KEY = 'max40_rsvp_v1';
+
+  function getGuests() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; }
+  }
+
+  function saveGuests(g) {
+    localStorage.setItem(KEY, JSON.stringify(g));
+  }
+
+  function renderGuests() {
+    const guests = getGuests();
+    const list = document.getElementById('guestList');
+    const count = document.getElementById('guestCount');
+
+    const coming = guests.filter(g => g.attend === 'yes');
+    count.textContent = `${guests.length} svar · ${coming.length} kommer`;
+
+    if (!guests.length) {
+      list.innerHTML = '<div class="empty-state">Ingen svar endnu — vær den første! 🎈</div>';
+      return;
+    }
+
+    list.innerHTML = guests.map(g => {
+      const initials = g.name.split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase();
+      const adults = g.adults > 1 ? `${g.adults} voksne` : '1 voksen';
+      const kids = g.children > 0 ? ` · ${g.children} ${g.children===1?'barn':'børn'}` : '';
+      const status = g.attend === 'yes' ? '✅' : '❌';
+      return `
+        <div class="guest-item">
+          <div class="guest-avatar">${initials}</div>
+          <div class="guest-info">
+            <div class="guest-name">${escHtml(g.name)}</div>
+            <div class="guest-meta">${adults}${kids}${g.mobile && g.showMobile ? ' · 📱 '+escHtml(g.mobile) : ''}${g.allergy ? ' · 🌿 '+escHtml(g.allergy) : ''}</div>
+            ${g.message ? `<div class="guest-msg">"${escHtml(g.message)}"</div>` : ''}
+          </div>
+          <div class="guest-status">${status}</div>
+        </div>`;
+    }).join('');
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function submitRSVP() {
+    const name = document.getElementById('name').value.trim();
+    if (!name) {
+      document.getElementById('name').focus();
+      document.getElementById('name').style.borderColor = '#e74c3c';
+      setTimeout(() => document.getElementById('name').style.borderColor = '', 1500);
+      return;
+    }
+
+    const attend = document.querySelector('input[name="attend"]:checked').value;
+    const mobile = document.getElementById('mobile').value.trim();
+    const showMobile = document.getElementById('showMobile').checked;
+    const adults = document.getElementById('adults').value;
+    const children = document.getElementById('children').value;
+    const allergy = document.getElementById('allergy').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    const guest = { name, mobile, showMobile, attend, adults: parseInt(adults), children: parseInt(children), allergy, message, ts: Date.now() };
+    const guests = getGuests();
+    guests.unshift(guest);
+    saveGuests(guests);
+
+    // Show success
+    document.getElementById('formFields').classList.add('hide');
+    const successEl = document.getElementById('successMsg');
+    successEl.classList.add('show');
+    document.getElementById('successName').textContent = name.split(' ')[0];
+
+    if (attend === 'no') {
+      document.getElementById('successTitle').innerHTML = `Trist, ${name.split(' ')[0]} 😢`;
+      document.getElementById('successText').innerHTML = `Vi sætter pris på at du svarede.<br>Måske en anden gang! <strong>Max sender kærlighed 💛</strong>`;
+    }
+
+    renderGuests();
+    setTimeout(() => {
+      document.getElementById('guestList').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 600);
+  }
+
+  const ADMIN_PIN = '4040';
+
+  function toggleAdmin() {
+    const p = document.getElementById('adminPanel');
+    p.style.display = p.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function checkPin() {
+    const pin = document.getElementById('adminPin').value;
+    if (pin === ADMIN_PIN) {
+      document.getElementById('adminLogin').style.display = 'none';
+      document.getElementById('adminContent').style.display = 'block';
+      renderAdminList();
+    } else {
+      document.getElementById('pinError').style.display = 'block';
+      document.getElementById('adminPin').style.borderColor = '#e74c3c';
+    }
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && document.getElementById('adminPin') === document.activeElement) checkPin();
+  });
+
+  function renderAdminList() {
+    const guests = getGuests();
+    const el = document.getElementById('adminList');
+    if (!guests.length) { el.innerHTML = '<div style="color:var(--muted);font-size:14px;text-align:center;">Ingen svar endnu</div>'; return; }
+    const coming = guests.filter(g => g.attend === 'yes').length;
+    const totalPeople = guests.filter(g => g.attend === 'yes').reduce((s,g) => s + g.adults + g.children, 0);
+    el.innerHTML = `
+      <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+        <div style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.25);border-radius:10px;padding:10px 16px;font-size:13px;color:var(--gold);">✅ ${coming} kommer</div>
+        <div style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.25);border-radius:10px;padding:10px 16px;font-size:13px;color:var(--gold);">👥 ${totalPeople} personer i alt</div>
+        <div style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.25);border-radius:10px;padding:10px 16px;font-size:13px;color:var(--gold);">📩 ${guests.length} svar i alt</div>
+      </div>
+      ${guests.map(g => {
+        const initials = g.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+        const status = g.attend === 'yes' ? '✅' : '❌';
+        const adults = g.adults > 1 ? `${g.adults} voksne` : '1 voksen';
+        const kids = g.children > 0 ? ` · ${g.children} ${g.children===1?'barn':'børn'}` : '';
+        return `
+          <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:14px 16px;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dark),var(--gold));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--black);flex-shrink:0;">${initials}</div>
+              <div style="flex:1;">
+                <div style="font-weight:500;color:white;font-size:14px;">${escHtml(g.name)} ${status}</div>
+                <div style="font-size:12px;color:var(--muted);margin-top:2px;">${adults}${kids}</div>
+                ${g.mobile ? `<div style="font-size:13px;color:var(--gold);margin-top:4px;">📱 <a href="tel:${escHtml(g.mobile)}" style="color:var(--gold);text-decoration:none;">${escHtml(g.mobile)}</a> ${g.showMobile ? '<span style="font-size:10px;color:var(--muted);">(synlig for alle)</span>' : '<span style="font-size:10px;color:var(--muted);">(kun for dig)</span>'}</div>` : ''}
+                ${g.allergy ? `<div style="font-size:12px;color:var(--muted);margin-top:2px;">🌿 ${escHtml(g.allergy)}</div>` : ''}
+                ${g.message ? `<div style="font-size:12px;color:rgba(212,175,55,0.7);margin-top:4px;font-style:italic;">"${escHtml(g.message)}"</div>` : ''}
+              </div>
+            </div>
+          </div>`;
+      }).join('')}`;
+  }
+
+  // Init
+  renderGuests();
+</script>
+</body>
+</html>
